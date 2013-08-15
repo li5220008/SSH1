@@ -2,11 +2,18 @@
 <!DOCTYPE struts PUBLIC
     "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
     "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
 <struts-config>
+    <form-beans>
+        <form-bean name="personForm" type="cn.itcast.web.action.formbean.PersonForm"/>
+    </form-beans>
 	<action-mappings>
 		<action path="/person/list"  validate="false">
 			<forward name="list" path="/WEB-INF/page/personList.jsp" />
 		</action>
+        <action path="/person/manage" parameter="method" validate="false" scope="request" name="personForm">
+            <forward name="message" path="/WEB-INF/page/message.jsp"/>
+        </action>
 	</action-mappings>
 	<controller>
 		<set-property  property="processorClass" value="org.springframework.web.struts.DelegatingRequestProcessor"/>
