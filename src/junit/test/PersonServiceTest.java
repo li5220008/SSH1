@@ -27,22 +27,31 @@ public class PersonServiceTest {
 
 	@Test
 	public void testSave() {
-		personService.save(new Person("小张"));
+		personService.save(new Person("小薇"));
 	}
 
 	@Test
 	public void testUpdate() {
-		Person person = personService.getPerson(1);
+		Person person = personService.getPerson(2);
 		person.setName("晓丽");
 		personService.update(person);
 	}
 
 	@Test
 	public void testGetPerson() {
-		Person person = personService.getPerson(1);
+		Person person = personService.getPerson(4);
 		System.out.println(person.getName());
-		
-	}
+        try {
+            System.out.println("请关闭数据库");
+            Thread.sleep(1000*15);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("第二次从缓存获取");
+        person = personService.getPerson(4);
+        System.out.println(person.getName());
+
+    }
 
 	@Test
 	public void testDelete() {
